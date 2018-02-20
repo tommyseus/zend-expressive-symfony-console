@@ -1,0 +1,59 @@
+{
+  "name": "tommyseus/zend-expressive-symfony-console",
+  "type": "library",
+  "description": "This project adds a executable file to the composer bin folder to run symfony commands under a zend-expressive application environment.",
+  "license": "MIT",
+  "homepage": "https://github.com/tommyseus/zend-expressive-symfony-console",
+  "authors": [
+    {
+      "name": "Tommy Seus"
+    }
+  ],
+  "keywords": [
+    "console",
+    "expressive",
+    "symfony",
+    "zendframework",
+    "zend-expressive",
+    "zf"
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^7.1",
+    "psr/container": "^1.0.0",
+    "symfony/console": "^4.0.4"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.10.2",
+    "phpunit/phpunit": "^7.0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Seus\\Zend\\Expressive\\SymfonyConsole\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SeusTest\\Zend\\Expressive\\SymfonyConsole\\": "tests"
+    }
+  },
+  "bin": [
+    "bin/ze-sf-console"
+  ],
+  "extra": {
+    "zf": {
+      "config-provider": "Seus\\Zend\\Expressive\\SymfonyConsole\\ConfigProvider"
+    }
+  },
+  "scripts": {
+    "check": [
+      "@cs-check",
+      "@test"
+    ],
+    "cs-check": "vendor/bin/php-cs-fixer fix --diff --dry-run --verbose --ansi",
+    "cs-fix": "vendor/bin/php-cs-fixer fix --verbose --ansi",
+    "test": "phpunit --colors=always"
+  }
+}

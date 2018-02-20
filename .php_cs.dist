@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Creates the config object for php-cs-fixer.
+ *
+ * https://github.com/FriendsOfPHP/PHP-CS-Fixer
+ */
+$header = <<<'PHP'
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+PHP;
+
+return PhpCsFixer\Config::create()
+    ->setUsingCache(true)
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@DoctrineAnnotation' => true,
+        '@Symfony' => true,
+        '@Symfony:risky' => true,
+        '@PHP71Migration' => true,
+        '@PHP71Migration:risky' => true,
+        '@PHPUnit60Migration:risky' => true,
+
+        // disabled
+        'phpdoc_summary' => false,
+        'yoda_style' => false,
+
+        // enabled
+        'array_syntax' => ['syntax' => 'short'],
+        'concat_space' => ['spacing' => 'one'],
+        'header_comment' => [
+            'commentType' => 'comment',
+            'header' => $header,
+            'location' => 'after_open',
+            'separate' => 'bottom',
+        ],
+        'linebreak_after_opening_tag' => true,
+        'multiline_whitespace_before_semicolons' => true,
+        'no_useless_else' => true,
+        'no_useless_return' => true,
+        'ordered_imports' => true,
+        'phpdoc_add_missing_param_annotation' => true,
+        'phpdoc_order' => true,
+        'php_unit_construct' => true,
+    ])
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->files()
+            ->in(__DIR__)
+            ->append([
+                'bin/ze-sf-console',
+            ])
+            ->notName('*.xml')
+    );
