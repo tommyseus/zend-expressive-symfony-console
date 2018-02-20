@@ -9,9 +9,7 @@ declare(strict_types=1);
 namespace Seus\Zend\Expressive\SymfonyConsole;
 
 // require vendor/autoload.php
-if (file_exists($path = __DIR__ . '/../../../vendor/autoload.php')) { // @todo remove lines
-    require_once $path;
-} elseif (file_exists($path = __DIR__ . '/../../../autoload.php')) {
+if (file_exists($path = __DIR__ . '/../../../autoload.php')) {
     require_once $path;
 } elseif (file_exists($path = __DIR__ . '/../vendor/autoload.php')) {
     require_once $path;
@@ -20,9 +18,7 @@ if (file_exists($path = __DIR__ . '/../../../vendor/autoload.php')) { // @todo r
 }
 
 // get container instance from config/container.php
-if (file_exists($path = __DIR__ . '/../../../config/container.php')) { // @todo remove lines
-    $container = require $path;
-} elseif (file_exists($path = __DIR__ . '/../../../../config/container.php')) {
+if (file_exists($path = __DIR__ . '/../../../../config/container.php')) {
     $container = require $path;
 } elseif (file_exists($path = __DIR__ . '/../config/container.php')) {
     $container = require $path;
