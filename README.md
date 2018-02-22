@@ -13,7 +13,7 @@ application environment.
 ### Composer installation
 
 ```bash
-$ composer require tommyseus/ze-sf-console
+$ composer require tommyseus/zend-expressive-symfony-console
 ```
 
 ### Configuration
