@@ -1,7 +1,7 @@
 # zend-expressive symfony console
 
 [![Latest Stable Version](https://poser.pugx.org/tommyseus/zend-expressive-symfony-console/v/stable)](https://packagist.org/packages/tommyseus/zend-expressive-symfony-console)
-[![Total Downloads](https://poser.pugx.org/tommyseus/zend-expressive-symfony-console/downloads)](https://packagist.org/packages/tommyseus/zend-expressive-symfony-console)
+[![License](https://poser.pugx.org/tommyseus/zend-expressive-symfony-console/license)](https://packagist.org/packages/tommyseus/zend-expressive-symfony-console)
 [![Build Status](https://travis-ci.org/tommyseus/zend-expressive-symfony-console.svg?branch=master)](https://travis-ci.org/tommyseus/zend-expressive-symfony-console)
 
 This project adds a executable file to the composer bin folder to run symfony commands under a zend-expressive
