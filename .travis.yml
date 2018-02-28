@@ -10,9 +10,9 @@ matrix:
   fast_finish: true
   include:
     - php: 7.1
+    - php: 7.2
       env:
-      - EXECUTE_TEST_COVERALLS=true
-    #- php: 7.2
+        - EXECUTE_TEST_COVERALLS=true
 
 before_install:
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer require --dev --no-update php-coveralls/php-coveralls ; fi
