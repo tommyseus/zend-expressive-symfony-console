@@ -49,6 +49,7 @@ class ApplicationFactoryTest extends TestCase
 
         $container = $this->prophesize(ContainerInterface::class);
         $container->get('config')->willReturn($config);
+        $container->has('dummy-command')->willReturn(true);
         $container->get('dummy-command')->willReturn($dummyCommand);
 
         $applicationFactory = new ApplicationFactory();
@@ -58,5 +59,34 @@ class ApplicationFactoryTest extends TestCase
         $this->assertSame('dummy application name', $application->getName());
         $this->assertSame('1.2.3', $application->getVersion());
         $this->assertSame($dummyCommand, $application->get('dummy-command'));
+    }
+
+    public function testFactory03(): void
+    {
+        $config = [
+            'seus-zend-expressive-symfony-console' => [
+                'name' => 'dummy application name',
+                'version' => '1.2.3',
+                'commands' => [
+                    'dummy:command-name' => 'dummy-command',
+                ],
+            ],
+        ];
+
+        $dummyCommand = new SymfonyConsole\Command\Command('command-name');
+
+        $container = $this->prophesize(ContainerInterface::class);
+        $container->get('config')->willReturn($config);
+        $container->has('dummy-command')->willReturn(true);
+        $container->get('dummy-command')->willReturn($dummyCommand);
+
+        $applicationFactory = new ApplicationFactory();
+        $application = $applicationFactory($container->reveal());
+
+        $this->assertInstanceOf(SymfonyConsole\Application::class, $application);
+        $this->assertSame('dummy application name', $application->getName());
+        $this->assertSame('1.2.3', $application->getVersion());
+        $this->assertSame($dummyCommand, $application->get('dummy:command-name'));
+        $this->assertSame('dummy:command-name', $application->get('dummy:command-name')->getName());
     }
 }

@@ -10,11 +10,16 @@ namespace Seus\Zend\Expressive\SymfonyConsole;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 
+/**
+ * Factory to create a symfony console application.
+ */
 class ApplicationFactory
 {
     /**
-     * Factoy method to create a symfony console application.
+     * Factory method to create a symfony console application.
      *
      * @param ContainerInterface $container
      *
@@ -28,8 +33,7 @@ class ApplicationFactory
             $config['name'] ?? 'Application Console',
             $config['version'] ?? 'UNKNOWN'
         );
-
-        $this->addCommandsToApplication($container, $application, $config['commands'] ?? []);
+        $application->setCommandLoader($this->createCommandLoader($container, $config['commands'] ?? []));
 
         return $application;
     }
@@ -47,19 +51,30 @@ class ApplicationFactory
     }
 
     /**
-     * Adds the commands to the symfony console application.
+     * Create CommandLoader for the symfony console application.
      *
      * @param ContainerInterface $container
-     * @param Application        $application
      * @param array|string[]     $commands
+     *
+     * @return CommandLoaderInterface
      */
-    private function addCommandsToApplication(
+    private function createCommandLoader(
         ContainerInterface $container,
-        Application $application,
         array $commands
-    ): void {
-        foreach ($commands as $command) {
-            $application->add($container->get($command));
+    ): CommandLoaderInterface {
+        $commandMap = [];
+
+        foreach ($commands as $name => $serviceKey) {
+            if (\is_int($name)) {
+                // name is not defined
+                /* @var $command Command */
+                $command = $container->get($serviceKey);
+                $name = $command->getName();
+            }
+
+            $commandMap[$name] = $serviceKey;
         }
+
+        return new ContainerCommandLoader($container, $commandMap);
     }
 }

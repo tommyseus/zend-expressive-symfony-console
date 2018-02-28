@@ -23,7 +23,8 @@ Add the \Seus\Zend\Expressive\SymfonyConsole\ConfigProvider to the config/config
 
 #### Configuration of the symfony console application
 
-add this configuration to your application config (ex.: config/autoload/ze-sf-console.global.php)
+- Add this configuration to your application config (ex.: config/autoload/ze-sf-console.global.php).
+- It is recommended to define the command name.
 
 ```php
 [
@@ -32,7 +33,8 @@ add this configuration to your application config (ex.: config/autoload/ze-sf-co
         'version' => '1.0.0', // optional
         'commands' => [
             // add the command service names here
-            // ex.: Command::class,
+            // ex.: 'foo:bar' => Command::class, // recommended, lazy
+            // ex.: Command::class, // not lazy
         ],
     ],
 
