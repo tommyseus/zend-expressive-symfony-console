@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Seus\Zend\Expressive\SymfonyConsole;
 
+use Symfony\Component\Console\Application;
+
 class ConfigProvider
 {
     /**
