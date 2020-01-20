@@ -9,9 +9,12 @@ declare(strict_types=1);
 namespace Seus\Zend\Expressive\SymfonyConsole;
 
 // require vendor/autoload.php
+use Exception;
+use Symfony\Component\Console\Application;
+
 if (file_exists($path = __DIR__ . '/../../../autoload.php')) {
     require_once $path;
-} elseif (file_exists($path = __DIR__ . '/../vendor/autoload.php')) {
+} else if (file_exists($path = __DIR__ . '/../vendor/autoload.php')) {
     require_once $path;
 } else {
     throw new \RuntimeException('Unable to locate \'vendor/autoload.php\'');
@@ -20,7 +23,7 @@ if (file_exists($path = __DIR__ . '/../../../autoload.php')) {
 // get container instance from config/container.php
 if (file_exists($path = __DIR__ . '/../../../../config/container.php')) {
     $container = require $path;
-} elseif (file_exists($path = __DIR__ . '/../config/container.php')) {
+} else if (file_exists($path = __DIR__ . '/../config/container.php')) {
     $container = require $path;
 } else {
     throw new \RuntimeException('Unable to locate \'config/container.php\'');
@@ -31,4 +34,8 @@ if (file_exists($path = __DIR__ . '/../../../../config/container.php')) {
 $application = $container->get(Application::class);
 
 // execute the symfony console application
-exit($application->run());
+try {
+    exit($application->run());
+} catch (Exception $e) {
+    exit(255);
+}

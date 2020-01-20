@@ -1,13 +1,10 @@
 <?php
-/*
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 declare(strict_types=1);
 
-namespace Seus\Zend\Expressive\SymfonyConsole;
+namespace AlexTartan\Mezzio\SymfonyConsole;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader as SymfonyContainerCommandLoader;
 
 /**
@@ -15,7 +12,7 @@ use Symfony\Component\Console\CommandLoader\ContainerCommandLoader as SymfonyCon
  */
 class ContainerCommandLoader extends SymfonyContainerCommandLoader
 {
-    public function get($name)
+    public function get(string $name): Command
     {
         $command = parent::get($name);
         $command->setName($name);

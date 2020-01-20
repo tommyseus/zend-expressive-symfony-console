@@ -7,22 +7,30 @@ cache:
     - $HOME/.composer/cache
 
 matrix:
-  fast_finish: true
   include:
-    - php: 7.1
-    - php: 7.2
+    - php: 7.4
       env:
-        - EXECUTE_TEST_COVERALLS=true
+        - CS_CHECK=true
+        - TEST_COVERAGE=true
+        - PHPSTAN=true
 
 before_install:
-  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer require --dev --no-update php-coveralls/php-coveralls ; fi
+  - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
+  - travis_retry composer self-update
 
 install:
-  - travis_retry composer install --no-interaction
+  - travis_retry composer install --no-interaction --ignore-platform-reqs
+  - stty cols 120
+  - export COLUMNS=120
+  - composer show
 
 script:
-  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then ./vendor/bin/phpunit --coverage-clover clover.xml ; fi
-  - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then ./vendor/bin/phpunit ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage && composer test-infection ; else composer test ; fi
+  #- if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
+  - if [[ $PHPSTAN == 'true' ]]; then composer phpstan ; fi
 
 after_script:
-  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then ./vendor/bin/php-coveralls ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer upload-coverage ; fi
+
+notifications:
+  email: false
