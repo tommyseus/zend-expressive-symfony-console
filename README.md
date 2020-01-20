@@ -28,7 +28,7 @@ Add the \AlexTartan\Mezzio\SymfonyConsole\ConfigProvider to the config/config.ph
 
 ```php
 [
-    'alextartan-mezzio-symfony-console' => [
+    'mezzio-symfony-console' => [
         'name' => 'Console Name',
         'version' => '1.0.0', // optional
         'commands' => [
