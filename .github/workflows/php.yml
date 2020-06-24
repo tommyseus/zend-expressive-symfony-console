@@ -32,8 +32,11 @@ jobs:
     - name: Codestyle checks
       run: composer run-script cs-check
 
-    - name: Tests
+    - name: Tests - coverage
       run: composer run-script test-coverage -- --coverage-clover=coverage.xml
+      
+    - name: Tests - mutation
+      run: composer run-script test-infection
       
     - name: Codecov
       run: bash <(curl -s https://codecov.io/bash)
