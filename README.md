@@ -1,3 +1,13 @@
+Current build status
+===
+![CI](https://github.com/alextartan/mezzio-symfony-console/workflows/CI/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/alextartan/mezzio-symfony-console/branch/master/graph/badge.svg)](https://codecov.io/gh/alextartan/mezzio-symfony-console)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Falextartan%2Fmezzio-symfony-console%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/alextartan/mezzio-symfony-console/master)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=alextartan/mezzio-symfony-console)](https://dependabot.com)
+[![Downloads](https://img.shields.io/badge/dynamic/json.svg?url=https://repo.packagist.org/packages/alextartan/mezzio-symfony-console.json&label=Downloads&query=$.package.downloads.total&colorB=orange)](https://packagist.org/packages/alextartan/mezzio-symfony-console)
+
+
+
 # mezzio symfony console
 
 This project adds a executable file to the composer bin folder to run symfony commands under a zend-expressive
